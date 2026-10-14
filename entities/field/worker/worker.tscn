@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://k7workertsac1"]
+
+[ext_resource type="Script" path="res://entities/field/worker/worker.gd" id="1_worker"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avoid"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 16.0
+
+[node name="Worker" type="CharacterBody2D" node_paths=PackedStringArray("hit", "shape", "avoid", "nav")]
+motion_mode = 1
+collision_layer = 1024
+collision_mask = 1
+script = ExtResource("1_worker")
+hit = NodePath("Hit")
+shape = NodePath("Hit/Shape")
+avoid = NodePath("Avoid")
+nav = NodePath("Nav")
+slide_on_ceiling = false
+floor_max_angle = 0.0
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Avoid" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3072
+monitoring = true
+
+[node name="Shape" type="CollisionShape2D" parent="Avoid"]
+shape = SubResource("CircleShape2D_avoid")
+
+[node name="Nav" type="NavigationAgent2D" parent="."]
+path_desired_distance = 8.0
+target_desired_distance = 16.0
+radius = 10.0
+neighbor_distance = 80.0
+max_neighbors = 8
+time_horizon_agents = 1.0
+time_horizon_obstacles = 1.0
+avoidance_enabled = true
+
+[node name="Hit" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hit"]
+shape = SubResource("CircleShape2D_hit")
+
+[connection signal="input_event" from="Hit" to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="Hit" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Hit" to="." method="_on_mouse_exited"]

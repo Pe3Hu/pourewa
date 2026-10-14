@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://br1lubxromts8"]
+
+[ext_resource type="FontFile" uid="uid://djaflot4rx25i" path="res://shared/fonts/dpcomic.ttf" id="1_rp2go"]
+
+[resource]
+resource_local_to_scene = true
+font = ExtResource("1_rp2go")
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)

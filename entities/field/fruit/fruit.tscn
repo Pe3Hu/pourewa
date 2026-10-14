@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://k7fruittsac1"]
+
+[ext_resource type="Script" path="res://entities/field/fruit/fruit.gd" id="1_fruit"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fruit"]
+radius = 12.0
+
+[node name="Fruit" type="StaticBody2D" node_paths=PackedStringArray("hit", "shape")]
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("1_fruit")
+hit = NodePath("Hit")
+shape = NodePath("Hit/Shape")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fruit")
+
+[node name="Hit" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hit"]
+shape = SubResource("CircleShape2D_fruit")
+
+[node name="Obstacle" type="NavigationObstacle2D" parent="."]
+radius = 12.0
+avoidance_enabled = true
+
+[connection signal="input_event" from="Hit" to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="Hit" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Hit" to="." method="_on_mouse_exited"]

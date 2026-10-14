@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://k7ffocustsa1"]
+
+[ext_resource type="Script" path="res://entities/field/focus/focus.gd" id="1_focus"]
+
+[node name="Focus" type="Node2D"]
+script = ExtResource("1_focus")
+
+[node name="Markers" type="Node2D" parent="."]
+unique_name_in_owner = true

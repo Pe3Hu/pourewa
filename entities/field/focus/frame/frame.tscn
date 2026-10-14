@@ -1,0 +1,7 @@
+[gd_scene load_steps=1 format=3 uid="uid://k7fframetsa1"]
+
+[node name="Frame" type="Line2D"]
+width = 2.0
+default_color = Color(1, 1, 1, 0.35)
+closed = true
+points = PackedVector2Array(0, -60, 48, -36, 48, 36, 0, 60, -48, 36, -48, -36)

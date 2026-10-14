@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://k7housetsac1"]
+
+[ext_resource type="Script" path="res://entities/field/building/building.gd" id="1_house"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_house"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 22.0
+
+[node name="Building" type="StaticBody2D" node_paths=PackedStringArray("hit", "title", "hire", "boost", "close")]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_house")
+hit = NodePath("Hit")
+title = NodePath("Panel/Box/Head/Title")
+hire = NodePath("Panel/Box/Hire")
+boost = NodePath("Panel/Box/Boost")
+close = NodePath("Panel/Box/Head/Close")
+
+[node name="Obstacle" type="NavigationObstacle2D" parent="."]
+radius = 22.0
+avoidance_enabled = true
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_house")
+
+[node name="Hit" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hit"]
+shape = SubResource("CircleShape2D_hit")
+
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
+z_index = 3000
+custom_minimum_size = Vector2(240, 168)
+offset_left = 28.0
+offset_top = -84.0
+offset_right = 268.0
+offset_bottom = 84.0
+
+[node name="Box" type="VBoxContainer" parent="Panel"]
+theme_override_constants/separation = 6
+
+[node name="Head" type="HBoxContainer" parent="Panel/Box"]
+
+[node name="Title" type="Label" parent="Panel/Box/Head"]
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Здание"
+
+[node name="Close" type="Button" parent="Panel/Box/Head"]
+custom_minimum_size = Vector2(32, 32)
+text = "X"
+
+[node name="Hire" type="Button" parent="Panel/Box"]
+text = "Нанять (10)"
+
+[node name="Boost" type="Button" parent="Panel/Box"]
+text = "Ускорить"
+
+[connection signal="input_event" from="Hit" to="." method="_on_input_event"]
+[connection signal="pressed" from="Panel/Box/Head/Close" to="." method="_on_close"]
+[connection signal="pressed" from="Panel/Box/Hire" to="." method="_on_hire"]
+[connection signal="pressed" from="Panel/Box/Boost" to="." method="_on_boost"]

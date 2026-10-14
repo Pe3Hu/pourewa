@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://k7fporttsac1"]
+
+[ext_resource type="Script" path="res://entities/field/focus/port_marker/port_marker.gd" id="1_port"]
+
+[node name="PortMarker" type="Node2D" node_paths=PackedStringArray("fill", "line", "hit", "shape")]
+script = ExtResource("1_port")
+fill = NodePath("Fill")
+line = NodePath("Line")
+hit = NodePath("Hit")
+shape = NodePath("Hit/Shape")
+
+[node name="Fill" type="Polygon2D" parent="."]
+color = Color(0.45, 1, 0.55, 0.35)
+
+[node name="Line" type="Line2D" parent="."]
+z_index = 1
+width = 3.0
+default_color = Color(0.45, 1, 0.55, 0.95)
+closed = true
+
+[node name="Hit" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hit"]
+
+[connection signal="input_event" from="Hit" to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="Hit" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Hit" to="." method="_on_mouse_exited"]

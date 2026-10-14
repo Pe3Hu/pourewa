@@ -1,0 +1,132 @@
+[gd_scene load_steps=3 format=3 uid="uid://k7pausemenu1"]
+
+[ext_resource type="Script" path="res://entities/field/pause/pause_menu.gd" id="1_pause"]
+[ext_resource type="LabelSettings" path="res://labels/default_label.tres" id="2_label"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
+layer = 100
+visible = false
+script = ExtResource("1_pause")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.05, 0.05, 0.05, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -280.0
+offset_right = 360.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Panel"]
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Panel/Box"]
+label_settings = ExtResource("2_label")
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Пауза"
+
+[node name="Continue" type="Button" parent="Panel/Box"]
+text = "Продолжить"
+
+[node name="Save" type="Button" parent="Panel/Box"]
+text = "Сохранить"
+
+[node name="Restart" type="Button" parent="Panel/Box"]
+text = "Начать заново"
+
+[node name="Quit" type="Button" parent="Panel/Box"]
+text = "Выйти из игры"
+
+[node name="Slots" type="VBoxContainer" parent="Panel/Box"]
+visible = false
+theme_override_constants/separation = 6
+
+[node name="Slot0" type="HBoxContainer" parent="Panel/Box/Slots"]
+
+[node name="Text" type="Label" parent="Panel/Box/Slots/Slot0"]
+size_flags_horizontal = 3
+label_settings = ExtResource("2_label")
+horizontal_alignment = 1
+text = "Слот 1  пусто"
+
+[node name="Save" type="Button" parent="Panel/Box/Slots/Slot0"]
+text = "Сохранить"
+
+[node name="Load" type="Button" parent="Panel/Box/Slots/Slot0"]
+text = "Загрузить"
+
+[node name="Delete" type="Button" parent="Panel/Box/Slots/Slot0"]
+text = "Удалить"
+
+[node name="Slot1" type="HBoxContainer" parent="Panel/Box/Slots"]
+
+[node name="Text" type="Label" parent="Panel/Box/Slots/Slot1"]
+size_flags_horizontal = 3
+label_settings = ExtResource("2_label")
+horizontal_alignment = 1
+text = "Слот 2  пусто"
+
+[node name="Save" type="Button" parent="Panel/Box/Slots/Slot1"]
+text = "Сохранить"
+
+[node name="Load" type="Button" parent="Panel/Box/Slots/Slot1"]
+text = "Загрузить"
+
+[node name="Delete" type="Button" parent="Panel/Box/Slots/Slot1"]
+text = "Удалить"
+
+[node name="Slot2" type="HBoxContainer" parent="Panel/Box/Slots"]
+
+[node name="Text" type="Label" parent="Panel/Box/Slots/Slot2"]
+size_flags_horizontal = 3
+label_settings = ExtResource("2_label")
+horizontal_alignment = 1
+text = "Слот 3  пусто"
+
+[node name="Save" type="Button" parent="Panel/Box/Slots/Slot2"]
+text = "Сохранить"
+
+[node name="Load" type="Button" parent="Panel/Box/Slots/Slot2"]
+text = "Загрузить"
+
+[node name="Delete" type="Button" parent="Panel/Box/Slots/Slot2"]
+text = "Удалить"
+
+[node name="Slot3" type="HBoxContainer" parent="Panel/Box/Slots"]
+
+[node name="Text" type="Label" parent="Panel/Box/Slots/Slot3"]
+size_flags_horizontal = 3
+label_settings = ExtResource("2_label")
+horizontal_alignment = 1
+text = "AUTO  пусто"
+
+[node name="Save" type="Button" parent="Panel/Box/Slots/Slot3"]
+visible = false
+text = "Сохранить"
+
+[node name="Load" type="Button" parent="Panel/Box/Slots/Slot3"]
+text = "Загрузить"
+
+[node name="Delete" type="Button" parent="Panel/Box/Slots/Slot3"]
+visible = false
+text = "Удалить"
+
+[connection signal="pressed" from="Panel/Box/Continue" to="." method="_on_continue"]
+[connection signal="pressed" from="Panel/Box/Save" to="." method="_on_save_menu"]
+[connection signal="pressed" from="Panel/Box/Restart" to="." method="_on_restart"]
+[connection signal="pressed" from="Panel/Box/Quit" to="." method="_on_quit"]

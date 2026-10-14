@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://k7fieldtsacc1"]
+
+[ext_resource type="Script" path="res://entities/field/field.gd" id="1_field"]
+[ext_resource type="PackedScene" path="res://entities/field/focus/focus.tscn" id="2_focus"]
+[ext_resource type="LabelSettings" path="res://labels/default_label.tres" id="3_label"]
+[ext_resource type="PackedScene" path="res://entities/field/pause/pause_menu.tscn" id="4_pause"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_felt"]
+size = Vector2(4000, 3000)
+
+[node name="Field" type="Node2D"]
+script = ExtResource("1_field")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Navigation" type="NavigationRegion2D" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
+unique_name_in_owner = true
+
+[node name="Felt" type="Polygon2D" parent="."]
+z_index = -200
+color = Color(0.5, 0.49, 0.46, 1)
+polygon = PackedVector2Array(-4000, -3000, 4000, -3000, 4000, 3000, -4000, 3000)
+
+[node name="Barn" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Buildings" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Deposits" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Stacks" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Ground" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Trees" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Towers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Fruits" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Workers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Pests" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Arrows" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Thieves" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Focus" parent="." instance=ExtResource("2_focus")]
+unique_name_in_owner = true
+
+[node name="FeltHit" type="Area2D" parent="."]
+z_index = -100
+
+[node name="Shape" type="CollisionShape2D" parent="FeltHit"]
+shape = SubResource("RectangleShape2D_felt")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Box" type="VBoxContainer" parent="Hud"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 360.0
+offset_bottom = 200.0
+theme_override_constants/separation = 4
+
+[node name="Nectar" type="Label" parent="Hud/Box"]
+unique_name_in_owner = true
+label_settings = ExtResource("3_label")
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Нектар: 0 / 1000"
+
+[node name="Season" type="Label" parent="Hud/Box"]
+unique_name_in_owner = true
+label_settings = ExtResource("3_label")
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Сезон: 0"
+
+[node name="PestLimit" type="Label" parent="Hud/Box"]
+unique_name_in_owner = true
+label_settings = ExtResource("3_label")
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Обжоры: 0 / 1"
+
+[node name="DebugNectar" type="Button" parent="Hud/Box"]
+unique_name_in_owner = true
+text = "+250 (тест)"
+
+[connection signal="input_event" from="FeltHit" to="." method="_on_felt_input"]
+[connection signal="pressed" from="Hud/Box/DebugNectar" to="." method="_on_debug_nectar"]
